@@ -1,8 +1,66 @@
-<html>
-  <head>
-    <title>Hi</title>
-  </head>
-  <body>
-    <p>xd</p>
-  </body>
+<!DOCTYPE html>
+<html lang="cs">
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<style>
+		table, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			width: 200px;
+			text-align: center;
+		}
+	</style>
+	<script>
+		
+		const pc = 10
+
+		let cisla = [
+			new Array(pc),
+			new Array(pc)
+		]
+
+		for (let i = 0; i < 2; i++) {
+			for (let j = 0; j < pc; j++) {
+				cisla[i][j] = Math.floor(Math.random() * 9 + 1)
+			}
+		}
+
+		for (let i = 0; i < 2; i++) {
+			for (let _ = 0; _ < pc; _++) {
+				for (let s = 0; s < pc; s++) {
+					if (cisla[i][s] < cisla[i][s-1]) {
+						var temp = cisla[i][s]
+						cisla[i][s] = cisla[i][s-1]
+						cisla[i][s-1] = temp
+					}
+				}
+			}
+		}
+
+		var matches = 0
+		var tableStr = ""
+
+		document.write("Seřazená pole:<br>")
+		for (let j = 0; j < pc; j++) {
+			var match = cisla[0][j] == cisla[1][j]
+			if (match) {
+				document.write("<b>")
+				tableStr += `<tr><td>${j+1}</td><td>${cisla[0][j]}</td></tr>`
+				matches++
+			}
+			document.write(`${cisla[0][j]} - `)
+			document.write(`${cisla[1][j]} `)
+			if (match) document.write("</b>")
+			document.write("<br>")
+		}
+
+		document.write("<br>")
+		
+		if (matches > 0)
+		document.write(`Počet shod: ${matches}<br><br><table><tr><td>Pozice</td><td>Hodnota</td></tr>${tableStr}</table>`)
+		else
+		document.write("Žádná shoda!")
+	
+	</script>
 </html>
